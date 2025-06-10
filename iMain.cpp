@@ -488,7 +488,7 @@ void drawHomepage()
     
     iSetColor(0, 0, 255); // blue colorj
     iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
-    iShowImage(0, 0, "D:\\1-1-game-project\\images\\front page.jpg");
+    iShowImage(0, 0, "E:\\1-1-game-project\\images\\front page.jpg");
 
 
 
@@ -535,8 +535,8 @@ void drawAbout()
 }
 void drawMenuPage()
 {
-   // iSetColor(0, 0, 255); // blue color
-    iShowImage(0, 0, "D:\\1-1-game-project\\images\\menupage.jpg");
+   // iSetColor(0, 0, 255); // blu ie color
+   iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
 
 }
  void drawGamePage()
