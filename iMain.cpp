@@ -215,38 +215,38 @@ void iMouse(int button, int state, int mx, int my)
         }
     }
     else if (menuPage == 1){
-        if (mx>=92 && mx<=345 && my>=445 && my<=500 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        menuPage=0;
-        gamePage = 1; 
-        gameState(); // Set game state to running
-        buttons(); // Draw buttons on the homepage
-         // Draw the game page
-         // Set game page to active
-        
-    }
-    else if (mx>=92 && mx<=345 && my>=345 && my<=400 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        menuPage=0;
-        gamePage = 1; 
-        gameState(); // Set game state to running
-        buttons(); // Draw buttons on the homepage
-         // Draw the game page
-         // Set game page to active
-        
-    }
-    // else if (menuPage==1 && mx>=92 && mx<=345 && my>=245 && my<=300 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    // {
-    //     menuPage=0;
-    //     gamePage = 1; 
-    //     gameState(); // Set game state to running
-    //     buttons(); 
-    // }
-    else if (mx>=92 && mx<=345 && my>=145 && my<=200 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-    {
-        menuPage=0;
-        exit(0);
-    }
+            if (mx>=92 && mx<=345 && my>=445 && my<=500 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            menuPage=0;
+            gamePage = 1; 
+            gameState(); // Set game state to running
+            buttons(); // Draw buttons on the homepage
+            // Draw the game page
+            // Set game page to active
+            
+        }
+        else if (mx>=92 && mx<=345 && my>=345 && my<=400 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            menuPage=0;
+            gamePage = 1; 
+            gameState(); // Set game state to running
+            buttons(); // Draw buttons on the homepage
+            // Draw the game page
+            // Set game page to active
+            
+        }
+        // else if (menuPage==1 && mx>=92 && mx<=345 && my>=245 && my<=300 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+        // {
+        //     menuPage=0;
+        //     gamePage = 1; 
+        //     gameState(); // Set game state to running
+        //     buttons(); 
+        // }
+        else if (mx>=92 && mx<=345 && my>=145 && my<=200 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            menuPage=0;
+            exit(0);
+        }
     }
     
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
