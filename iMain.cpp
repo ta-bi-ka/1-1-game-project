@@ -222,7 +222,7 @@ void iMouse(int button, int state, int mx, int my)
         buttons(); // Draw buttons on the homepage
          // Draw the game page
          // Set game page to active
-        // You can add code here to initialize the game state if needed
+        
     }
     else if (menuPage==1 && mx>=92 && mx<=345 && my>=345 && my<=400 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     {
@@ -232,7 +232,7 @@ void iMouse(int button, int state, int mx, int my)
         buttons(); // Draw buttons on the homepage
          // Draw the game page
          // Set game page to active
-        // You can add code here to initialize the game state if needed
+        
     }
     // else if (menuPage==1 && mx>=92 && mx<=345 && my>=245 && my<=300 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     // {
@@ -314,7 +314,7 @@ void iKeyboard(unsigned char key)
                 gamestate = paused; 
                 previousState=running;// Pause the game
                 gameState(); // Draw the paused state
-                // You can add code here to pause the game logic if needed
+                
             }
          break;
         }
@@ -327,7 +327,6 @@ void iKeyboard(unsigned char key)
                 gamePage = 1; // Set game page to active
                 buttons(); // Draw buttons on the homepage
                 gameState(); // Draw the game page
-                // You can add code here to resume the game logic if needed
             }
             else if (gamestate == menu)
             {
@@ -442,7 +441,7 @@ void buttons()
          iDraw();
         
         // Draw game page buttons
-        // For example, you can draw a button to pause the game or go back to homepage
+ 
     }
     else if(aboutPage)
     {
@@ -490,8 +489,6 @@ void drawHomepage()
     iSetColor(0, 0, 255); // blue color
     iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
     iShowImage(0, 0, "C:\\Users\\User\\Downloads\\Modern-iGraphics-main\\images\\front page.jpg");
-    // If iShowBMP is not available, use iShowImage or another valid function, or comment out this line.
-    // If iShowBMP is not available, use iShowImage or another valid function, or comment out this line.
 
 
 
