@@ -24,8 +24,8 @@ void drawInstructions();
 void drawAbout();
 void drawMenuPage();
 void gameState();
-// void drawHighScore();
-// void drawLevel1();
+ void drawHighScore();
+ void drawLevel1();
 // void drawLevel2();
 // void drawLevel3();
 // void pauseGame();
@@ -115,7 +115,7 @@ function iMouseMove() is called when the user moves the mouse.
 */
 void iMouseMove(int mx, int my)
 {
-// printf("Mouse moved to (%d, %d)\n", mx, my);
+ printf("Mouse moved to (%d, %d)\n", mx, my);
    
 //    if(homepage==1 && mx>=370 && mx<=608 && my>=355 && my<=400)
 //     {
