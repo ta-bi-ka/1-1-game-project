@@ -18,7 +18,7 @@ int previousState = paused; // Variable to hold the previous state when paused
 void drawHomepage();
 void drawGamePage();
 void buttons();
- void drawExit();
+void drawExit();
 
 void drawInstructions();
 void drawAbout();
@@ -172,8 +172,6 @@ void iMouseMove(int mx, int my)
 // */
 void iMouseDrag(int mx, int my)
 {
-
-    
     
     // place your codes here
 }
@@ -184,37 +182,40 @@ function iMouse() is called when the user presses/releases the mouse.
 */
 void iMouse(int button, int state, int mx, int my)
 {
-    if ( homepage==1 &&  mx>=370 && mx<=608 && my>=355 && my<=400 &&   button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        homepage = 0; 
-        menuPage = 1; 
-        buttons(); 
+    if (homepage == 1){
+            if (mx>=370 && mx<=608 && my>=355 && my<=400 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            homepage = 0; 
+            menuPage = 1; 
+            buttons(); 
+        }
+        else if (mx>=367 && mx<=605 && my>=291 && my<=333 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            homepage = 0; 
+            instructionsPage = 1; 
+            buttons(); 
+        }
+        else if (mx>=369 && mx<=605 && my>=231 && my<=275 &&   button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            homepage = 0; 
+            highScorePage = 1; 
+            buttons(); 
+        }
+        else if (mx>=367 && mx<=605 && my>=164 && my<=211 &&   button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            homepage = 0; 
+            aboutPage= 1; 
+            buttons(); 
+        }
+        else if (mx>=368 && mx<=605 && my>=100 && my<=146 &&   button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            homepage = 0; 
+            exitPage = 1; 
+            buttons(); 
+        }
     }
-    else if (homepage==1 && mx>=367 && mx<=605 && my>=291 && my<=333 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        homepage = 0; 
-        instructionsPage = 1; 
-        buttons(); 
-    }
-    else if ( homepage==1 &&  mx>=369 && mx<=605 && my>=231 && my<=275 &&   button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        homepage = 0; 
-        highScorePage = 1; 
-        buttons(); 
-    }
-    else if ( homepage==1 &&  mx>=367 && mx<=605 && my>=164 && my<=211 &&   button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        homepage = 0; 
-        aboutPage= 1; 
-        buttons(); 
-    }
-    else if ( homepage==1 &&  mx>=368 && mx<=605 && my>=100 && my<=146 &&   button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        homepage = 0; 
-        exitPage = 1; 
-        buttons(); 
-    }
-    if (menuPage==1 && mx>=92 && mx<=345 && my>=445 && my<=500 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    else if (menuPage == 1){
+        if (mx>=92 && mx<=345 && my>=445 && my<=500 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         menuPage=0;
         gamePage = 1; 
@@ -224,7 +225,7 @@ void iMouse(int button, int state, int mx, int my)
          // Set game page to active
         
     }
-    else if (menuPage==1 && mx>=92 && mx<=345 && my>=345 && my<=400 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    else if (mx>=92 && mx<=345 && my>=345 && my<=400 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         menuPage=0;
         gamePage = 1; 
@@ -241,18 +242,17 @@ void iMouse(int button, int state, int mx, int my)
     //     gameState(); // Set game state to running
     //     buttons(); 
     // }
-    else if (menuPage==1 && mx>=92 && mx<=345 && my>=145 && my<=200 && button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+    else if (mx>=92 && mx<=345 && my>=145 && my<=200 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
         menuPage=0;
-        
         exit(0);
     }
-
-
-
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    }
+    
+    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     {
-        // place your codes here
+        menuPage = 0;
+        homepage = 1;
     }
 }
 
@@ -486,7 +486,7 @@ void buttons()
 void drawHomepage()
 {
     
-    iSetColor(0, 0, 255); // blue colorj
+    iSetColor(0, 0, 255); // blue color
     iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\front page.jpg");
 
@@ -535,8 +535,8 @@ void drawAbout()
 }
 void drawMenuPage()
 {
-   // iSetColor(0, 0, 255); // blu ie color
-   iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
+   // iSetColor(0, 0, 255); // blue color
+    iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
 
 }
  void drawGamePage()
