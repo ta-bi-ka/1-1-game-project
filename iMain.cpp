@@ -1,6 +1,7 @@
 //this is a level-1 term-1 project of CSE,BUET on  making pac-man game using iGraphics library
 //bismillahir rahmanir rahim
 //gamepage diye gamestate page open hobe,pause/resume
+//void drawamaze e buttons call krsi ,buttons e kon onno page er sathe easy med hard 3 ta page add koiro,then idraw theke drawlevel1 or 2 or 3 call hbe accordingly
 #include "iGraphics.h"
 
 #include<windows.h>
@@ -29,12 +30,12 @@ void gameState();
 bool musicON = true;
 
  //void drawHighScore();
-// void drawLevel1();
-// void drawLevel2();
-// void drawLevel3();
+ void drawLevel1();
+ void drawLevel2();
+ void drawLevel3();
 // void pauseGame();
 // void resumeGame();
-// void drawMaze();
+ //void drawMaze();
 // void drawPacman();
 // void drawGhosts();
 // void drawBalls();
@@ -53,11 +54,123 @@ int exitPage;
 int highScorePage;
 int menuPage;
 int levelSelectionPage;
+int level1page;
+int level2page;
+int level3page;
+int row1=15;
+int col1=25;
+int row2=20;
+int col2=33;
+int row3=50;
+int col3=30;
+
  // 1 for game over, 0 for not game over
 
 /*
 function iDraw() is called again and again by the system.
 */
+
+
+int maze1[15][25]=
+
+    {{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 1, 1, 1, 2, 1, 0, 2, 1, 1, 1, 1, 0, 1, 1, 2, 0, 2, 1, 1, 1, 1, 1, 1, 1},
+    {0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
+    {0, 1, 0, 1, 2, 1, 1, 1, 2, 1, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0, 1, 1, 1, 0, 2},
+    {0, 0, 0, 1, 0, 0, 1, 1, 0, 2, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
+    {1, 1, 1, 2, 0, 1, 1, 2, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 2, 1, 1, 2, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
+    {0, 1, 0, 1, 2, 1, 2, 0, 1, 1, 1, 0, 1, 1, 0, 2, 0, 0, 1, 1, 1, 1, 1, 0, 1},
+    {0, 2, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 1},
+    {0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 2, 0, 0, 1, 1, 1},
+    {0, 0, 0, 0, 0, 1, 1, 1, 0, 2, 1, 1, 2, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+    {1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 2},
+    {2, 1, 0, 0, 0, 1, 1, 1, 2, 1, 0, 1, 0, 0, 1, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1},
+    {0, 1, 0, 1, 1, 1, 0, 0, 0, 2, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+
+int maze2[20][33]=
+ {
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0},
+    {0, 2, 1, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 2, 1, 1, 1, 0, 2, 0, 1, 0},
+    {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0},
+    {0, 1, 1, 2, 0, 1, 2, 1, 1, 1, 1, 1, 0, 1, 2, 0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0, 1, 1, 1, 1, 1, 0},
+    {0, 1, 1, 2, 1, 1, 0, 2, 2, 1, 2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0},
+    {1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 2, 0, 2, 1, 1, 1, 1, 0, 2, 1, 1, 0, 1, 0},
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 2, 2, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0},
+    {1, 1, 2, 2, 0, 2, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 2, 0, 1, 0, 1, 1, 1, 0, 1, 2, 1, 0, 1, 1, 1, 0},
+    {0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 2, 1, 1, 2, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0},
+    {1, 1, 0, 1, 2, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 2, 1, 2, 1, 0, 1, 0},
+    {0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 2, 0},
+    {0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 2, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0},
+    {1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0},
+    {0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 2, 1, 0, 1, 1, 1, 0, 2, 1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 0},
+    {0, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 1, 0},
+    {0, 0, 0, 0, 0, 2, 1, 1, 1, 2, 2, 0, 1, 1, 1, 0, 2, 1, 1, 2, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+};
+
+
+int maze3[50][30]=
+{
+    {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0},
+    {1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0},
+    {0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0},
+    {0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0},
+    {1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 1, 2, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1},
+    {1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0},
+    {1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0},
+    {1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0},
+    {1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+    {1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0},
+    {0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 2, 1, 0, 0, 1, 0},
+    {1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0},
+    {1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0},
+    {0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+    {0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+    {1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0},
+    {0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0},
+    {0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0},
+    {1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0},
+    {1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0},
+    {0, 0, 2, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0},
+    {0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0},
+    {0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0},
+    {0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0},
+    {0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0},
+    {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0},
+    {0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0},
+    {0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0},
+    {1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 2, 0, 1, 1},
+    {1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1},
+    {0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0},
+    {1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0},
+    {1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0},
+    {0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0},
+    {0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0},
+    {0, 1, 1, 1, 1, 0, 0, 1, 2, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0},
+    {1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0},
+    {1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0},
+    {0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0},
+    {0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1},
+    {1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 2, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0},
+    {1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0},
+    {1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+    {1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0},
+    {1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 2, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0},
+    {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0},
+    {0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0},
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+};
+
+
+
 
 void iDraw()
 {
@@ -103,7 +216,19 @@ if (homepage)
     else if (levelSelectionPage){
         drawLevelSelectionPage();
     }
-    // else
+     else if(level1page)
+
+     {
+        drawLevel1();
+     }
+     else if(level2page)
+     {
+        drawLevel2();
+     }
+     else if(level3page)
+     {
+        drawLevel3();
+     }
     // {
     //     // Draw the game elements
     //     drawMaze();
@@ -259,8 +384,32 @@ void iMouse(int button, int state, int mx, int my)
             homepage = 1; //Returns to home page from menu page when pressing exit
         }
 
+         
+
+    }
+else if (levelSelectionPage == 1){
+        if (mx>= && mx<= && my>= && my<= && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            levelSelectionPage = 0;
+            level1page = 1;
+            buttons();
+        }
+        else if (mx>= && mx<= && my>= && my<= && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            levelSelectionPage = 0;
+            level2page = 1;
+            buttons();
+        }
+        else if (mx>= && mx<= && my>= && my<= && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        {
+            levelSelectionPage = 0;
+            level3page = 1;
+            buttons();
+        }
     }
     
+
+
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
     {
         menuPage = 0;
@@ -438,6 +587,11 @@ void buttons()
         instructionsPage=0;
         exitPage=0;
         highScorePage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
+         
         iDraw();
 
          // Reset game page when on homepage
@@ -449,6 +603,11 @@ void buttons()
         aboutPage=0;
         homepage=0;
         instructionsPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
+
         exitPage=0;
         highScorePage=0;
         iDraw();
@@ -465,6 +624,10 @@ void buttons()
         aboutPage=0;
         menuPage=0;
         instructionsPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
         exitPage=0;
         highScorePage=0;
          iDraw();
@@ -477,6 +640,11 @@ void buttons()
         homepage = 0;
         gamePage=0;
         menuPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
+
         instructionsPage=0;
         exitPage=0;
         highScorePage=0;
@@ -490,6 +658,10 @@ void buttons()
         homepage = 0;
         menuPage=0;
         aboutPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
         gamePage=0;
         exitPage=0;
         highScorePage=0;
@@ -502,6 +674,11 @@ void buttons()
         menuPage=0;
         aboutPage=0;
         instructionsPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
+
         gamePage=0;
         highScorePage=0;
         iDraw();
@@ -511,16 +688,164 @@ void buttons()
         menuPage=0;
         aboutPage=0;
         instructionsPage=0;
+        level1page = 0;
+        level2page = 0;
+        level3page = 0;
         gamePage=0;
         highScorePage=0;
         exitPage = 0;
         iDraw();
     }
-    
+    else if(level1page)
+    {
+        homepage = 0;
+        menuPage=0;
+        aboutPage=0;
+        instructionsPage=0;
+        levelSelectionPage = 0;
+        level2page = 0;
+        level3page = 0;
+        gamePage=0;
+        exitPage=0;
+        highScorePage=0;
+
+        iDraw();
+    }
+    else if(level2page)
+    {
+        homepage = 0;
+        menuPage=0;
+        aboutPage=0;
+        instructionsPage=0;
+        levelSelectionPage = 0;
+        level1page = 0;
+        level3page = 0;
+        gamePage=0;
+        exitPage=0;
+        highScorePage=0;
+
+         iDraw();
+    }
+    else if(level3page)
+    {
+         homepage = 0;
+         menuPage=0;
+         aboutPage=0;
+         instructionsPage=0;
+         levelSelectionPage = 0;
+         level1page = 0;
+         level2page = 0;
+
+         gamePage=0;
+         exitPage=0;
+         highScorePage=0;
+
+         iDraw();
     
     
     
     }
+}
+
+
+void drawLevel1()
+{
+    
+    iSetColor(0, 0, 0); // black colour
+    iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
+    int cellWidth = screenWidth/col1;
+    int cellHeight = screenHeight/row1;
+    int i, j;
+    for(i=0;i<row1;i++)
+    {
+        for(j=0;j<col1;j++)
+        {
+            int x=j*cellWidth;
+            int y=screenHeight-(i+1)*cellHeight;
+            
+            if(maze1[i][j] == 1)
+            {
+                iSetColor(0,0,139);//blue color
+                iFilledRectangle(x, y, cellWidth, cellHeight); // draw the wall
+
+
+            }
+            if(maze1[i][j] == 2)
+            {
+                iSetColor(255, 255, 0); // yellow color for Pacman
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+            }
+
+
+     }
+
+
+
+
+}
+}
+
+
+
+void drawLevel2()
+{
+    
+    iSetColor(0, 0, 0); // black colour
+    iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
+    int cellWidth = screenWidth/col2;
+    int cellHeight = screenHeight/row2;
+    int i, j;
+    for(i=0;i<row2;i++)
+    {
+        for(j=0;j<col2;j++)
+        {
+            int x=j*cellWidth;
+            int y=screenHeight-(i+1)*cellHeight;
+            
+            if(maze2[i][j] == 1)
+            {
+                iSetColor(0,0,139);//blue color
+                iFilledRectangle(x, y, cellWidth, cellHeight); // draw the wall
+
+            }
+            if(maze2[i][j] == 2)
+            {
+                iSetColor(255, 255, 0); // yellow color for Pacman
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+            }
+        }
+    }
+}
+
+
+void drawLevel3()
+{
+    
+    iSetColor(0, 0, 0); // black colour
+    iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
+    int cellWidth = screenWidth / col3;
+    int cellHeight = screenHeight / row3;
+    int i, j;
+    for(i = 0; i < row3; i++)
+    {
+        for(j = 0; j < col3; j++)
+        {
+            int x = j * cellWidth;
+            int y = screenHeight - (i + 1) * cellHeight;
+
+            if(maze3[i][j] == 1)
+            {
+                iSetColor(0, 0, 139); // blue color
+                iFilledRectangle(x, y, cellWidth, cellHeight); // draw the wall
+            }
+            if(maze3[i][j] == 2)
+            {
+                iSetColor(255, 255, 0); // yellow color for Pacman
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+            }
+        }
+    }
+}
 
 void drawHomepage()
 {
