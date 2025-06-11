@@ -501,7 +501,8 @@ void drawHomepage()
     iSetColor(0, 0, 255); // blue color
     iFilledRectangle(0, 0, screenWidth, screenHeight); // fill the background
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\front page.jpg");
-
+    iSetColor (255, 255, 255);
+    iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
 
 
 }
