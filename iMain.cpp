@@ -73,7 +73,8 @@ function iDraw() is called again and again by the system.
 
 int maze1[15][25]=
 
-    {{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+{
+    {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {1, 1, 1, 1, 2, 1, 0, 2, 1, 1, 1, 1, 0, 1, 1, 2, 0, 2, 1, 1, 1, 1, 1, 1, 1},
     {0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1},
     {0, 1, 0, 1, 2, 1, 1, 1, 2, 1, 0, 1, 0, 1, 1, 2, 1, 1, 1, 0, 1, 1, 1, 0, 2},
@@ -87,7 +88,8 @@ int maze1[15][25]=
     {1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 2},
     {2, 1, 0, 0, 0, 1, 1, 1, 2, 1, 0, 1, 0, 0, 1, 1, 1, 2, 1, 1, 0, 1, 1, 1, 1},
     {0, 1, 0, 1, 1, 1, 0, 0, 0, 2, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1},
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+};
 
 
 int maze2[20][33]=
@@ -383,14 +385,33 @@ void iMouse(int button, int state, int mx, int my)
             menuPage=0;
             homepage = 1; //Returns to home page from menu page when pressing exit
         }
+        else if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+        {
+            menuPage = 0;
+            homepage = 1;
+        }
+    }
 
+    else if (levelSelectionPage){
+        if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+        {
+            levelSelectionPage = 0;
+            menuPage = 1;
+        }
+        else if (mx >= 98 && mx <= 282 && my >= 396 && my <= 454 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+            levelSelectionPage = 0;
+            level1page = 1;
+        }
+        else if (mx >= 98 && mx <= 282 && my >= 295 && my <= 355 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+            levelSelectionPage = 0;
+            level2page = 1;
+        }
+        else if (mx >= 98 && mx <= 282 && my >= 197 && my <= 255 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+            levelSelectionPage = 0;
+            level3page = 1;
+        }
     }
     
-    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        menuPage = 0;
-        homepage = 1;
-    }
 }
 
 /*
@@ -431,6 +452,10 @@ void iKeyboard(unsigned char key)
         else if (levelSelectionPage == 1){
             menuPage = 1;
             levelSelectionPage = 0;
+        }
+        else if (gamePage == 1){
+            gamePage = 0;
+            menuPage = 1;
         }
 
      
@@ -707,7 +732,7 @@ void buttons()
         exitPage=0;
         highScorePage=0;
 
-         iDraw();
+        iDraw();
     }
     else if(level3page)
     {
@@ -745,6 +770,10 @@ void drawLevel1()
         {
             int x=j*cellWidth;
             int y=screenHeight-(i+1)*cellHeight;
+            if (maze1[i][j] == 0){
+                iSetColor(255, 255, 255);
+                iFilledCircle(x+20, y+20, 5, 100);
+            }
             
             if(maze1[i][j] == 1)
             {
@@ -784,6 +813,10 @@ void drawLevel2()
         {
             int x=j*cellWidth;
             int y=screenHeight-(i+1)*cellHeight;
+            // if (maze1[i][j] == 0){
+            //     iSetColor(255, 255, 255);
+            //     iFilledCircle(x, y, 5, 100);
+            // }
             
             if(maze2[i][j] == 1)
             {
@@ -899,6 +932,7 @@ void drawMenuPage()
 {
    // iSetColor(0, 0, 255); // blue color
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
+    iSetColor(255, 255, 255);
     iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
     iText(655, 52, "Press RMB or Q to go back", GLUT_BITMAP_TIMES_ROMAN_24);
 
