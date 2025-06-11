@@ -756,9 +756,9 @@ void drawLevel1()
         {
             int x=j*cellWidth;
             int y=screenHeight-(i+1)*cellHeight;
-            if (maze1[i][j] == 0){
-                iSetColor(255, 255, 255);
-                iFilledCircle(x+20, y+20, 4, 100);
+            if (maze1[i][j] == 0) {
+                iSetColor(255, 255, 255); // white color
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 3, 100); // small white dots
             }
             
             if(maze1[i][j] == 1)
@@ -800,9 +800,9 @@ void drawLevel2()
             int x=j*cellWidth;
             int y=screenHeight-(i+1)*cellHeight;
             
-            if (maze2[i][j] == 0){
-                iSetColor(255, 255, 255);
-                iFilledCircle(x+15, y+13, 4, 100);
+            if (maze2[i][j] == 0) {
+                iSetColor(255, 255, 255); // white color
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 4, 100); // small white dots
             }
             
             if(maze2[i][j] == 1)
