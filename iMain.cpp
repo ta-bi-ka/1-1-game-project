@@ -19,6 +19,7 @@ void drawHomepage();
 void drawGamePage();
 void buttons();
 void drawExit();
+void drawLevelSelectionPage();
 
 void drawInstructions();
 void drawAbout();
@@ -51,6 +52,7 @@ int instructionsPage;
 int exitPage;
 int highScorePage;
 int menuPage;
+int levelSelectionPage;
  // 1 for game over, 0 for not game over
 
 /*
@@ -97,6 +99,9 @@ if (homepage)
     else if (exitPage)
     {
         drawExit();
+    }
+    else if (levelSelectionPage){
+        drawLevelSelectionPage();
     }
     // else
     // {
@@ -220,10 +225,13 @@ void iMouse(int button, int state, int mx, int my)
     else if (menuPage == 1){
             if (mx>=92 && mx<=345 && my>=445 && my<=500 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
         {
-            menuPage=0;
-            gamePage = 1; 
-            gameState(); // Set game state to running
-            buttons(); // Draw buttons on the homepage
+            menuPage = 0;
+            levelSelectionPage = 1;
+            buttons();
+            // menuPage=0;
+            // gamePage = 1; 
+            // gameState(); // Set game state to running
+            // buttons(); // Draw buttons on the homepage
             // Draw the game page
             // Set game page to active
             
@@ -250,6 +258,7 @@ void iMouse(int button, int state, int mx, int my)
             menuPage=0;
             homepage = 1; //Returns to home page from menu page when pressing exit
         }
+
     }
     
     if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
@@ -282,8 +291,16 @@ void iKeyboard(unsigned char key)
     case 'q':
     case 'Q':
     {
-     gamestate = menu; // Set game state to menu
-     exit(0); // Exit the game
+        if (homepage == 1){
+            gamestate = menu;
+            exit(0);
+        }
+        else if (menuPage == 1){
+            gamestate = menu;
+            menuPage = 0;
+            homepage = 1;
+        }
+
      
         break;
     }
@@ -362,7 +379,7 @@ void iSpecialKeyboard(unsigned char key)
     switch (key)
     {
     case GLUT_KEY_F1:
-        if (homepage == 1 | menuPage == 1){
+        if (homepage == 1 | menuPage == 1 | levelSelectionPage == 1){
             if (musicON){
                 musicON = false;
                 PlaySound(0, 0, 0);
@@ -489,6 +506,16 @@ void buttons()
         highScorePage=0;
         iDraw();
     }
+    else if (levelSelectionPage){
+        homepage = 0;
+        menuPage=0;
+        aboutPage=0;
+        instructionsPage=0;
+        gamePage=0;
+        highScorePage=0;
+        exitPage = 0;
+        iDraw();
+    }
     
     
     
@@ -503,9 +530,23 @@ void drawHomepage()
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\front page.jpg");
     iSetColor (255, 255, 255);
     iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
+    iText(655, 52, "Click Right Mouse to go back", GLUT_BITMAP_TIMES_ROMAN_24);
 
 
 }
+
+
+void drawLevelSelectionPage(){
+    iSetColor(0, 255, 0);
+    iFilledRectangle(0, 0, screenWidth, screenHeight);
+    iShowImage(0, 0, "E:\\1-1-game-project\\images\\LevelSelectionPage.jpg");
+    iShowImage(90, 380, "E:\\1-1-game-project\\images\\ButtonEasy.png");
+    iShowImage(90, 280, "E:\\1-1-game-project\\images\\ButtonMedium.png");
+    iShowImage(90, 180, "E:\\1-1-game-project\\images\\ButtonHard.png");
+    iSetColor(255, 255, 255);
+    iText(75, 490, "SELECT DIFFICULTY:", GLUT_BITMAP_TIMES_ROMAN_24);
+}
+
 void drawInstructions()
 {
     iSetColor(0, 0, 255); // blue color
@@ -550,6 +591,8 @@ void drawMenuPage()
 {
    // iSetColor(0, 0, 255); // blue color
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
+    iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
+    iText(655, 52, "Click Right Mouse to go back", GLUT_BITMAP_TIMES_ROMAN_24);
 
 }
  void drawGamePage()
