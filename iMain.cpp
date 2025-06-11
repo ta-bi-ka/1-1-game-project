@@ -24,6 +24,9 @@ void drawInstructions();
 void drawAbout();
 void drawMenuPage();
 void gameState();
+
+bool musicON = true;
+
  //void drawHighScore();
 // void drawLevel1();
 // void drawLevel2();
@@ -245,7 +248,7 @@ void iMouse(int button, int state, int mx, int my)
         else if (mx>=92 && mx<=345 && my>=145 && my<=200 && button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
         {
             menuPage=0;
-            exit(0);
+            homepage = 1; //Returns to home page from menu page when pressing exit
         }
     }
     
@@ -358,8 +361,17 @@ void iSpecialKeyboard(unsigned char key)
 {
     switch (key)
     {
-    case GLUT_KEY_END:
-        // do something
+    case GLUT_KEY_F1:
+        if (homepage == 1 | menuPage == 1){
+            if (musicON){
+                musicON = false;
+                PlaySound(0, 0, 0);
+            }
+            else{
+                musicON = true;
+                PlaySound("E:\\1-1-game-project\\music\\menuMusic.wav", NULL, SND_LOOP | SND_ASYNC);
+            }
+        }
         break;
     // place your codes for other keys here
     default:
@@ -553,6 +565,8 @@ void drawExit()
 
 int main(int argc, char *argv[])
 {
+
+    PlaySound("E:\\1-1-game-project\\music\\menuMusic.wav", NULL, SND_LOOP | SND_ASYNC);
     glutInit(&argc, argv);
     // place your own initialization codes here.
     iInitialize(screenWidth, screenHeight, "pacman");
