@@ -26,7 +26,7 @@ void drawAbout();
 void drawMenuPage();
 void gameState();
 
-bool musicON = true;
+bool menuMusicON = true;
 
  //void drawHighScore();
 // void drawLevel1();
@@ -258,14 +258,19 @@ void iMouse(int button, int state, int mx, int my)
             menuPage=0;
             homepage = 1; //Returns to home page from menu page when pressing exit
         }
-
+        if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
+        {
+            menuPage = 0;
+            homepage = 1;
+        }
+    }
+    else if (levelSelectionPage == 1){
+        if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN){
+            menuPage = 1;
+            levelSelectionPage = 0;
+        }
     }
     
-    if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-    {
-        menuPage = 0;
-        homepage = 1;
-    }
 }
 
 /*
@@ -295,10 +300,17 @@ void iKeyboard(unsigned char key)
             gamestate = menu;
             exit(0);
         }
-        else if (menuPage == 1){
+        else if (menuPage == 1 | aboutPage == 1 | highScorePage == 1 | instructionsPage == 1){
             gamestate = menu;
+            aboutPage = 0;
+            highScorePage = 0;
+            instructionsPage = 0;
             menuPage = 0;
             homepage = 1;
+        }
+        else if (levelSelectionPage == 1){
+            menuPage = 1;
+            levelSelectionPage = 0;
         }
 
      
@@ -380,12 +392,12 @@ void iSpecialKeyboard(unsigned char key)
     {
     case GLUT_KEY_F1:
         if (homepage == 1 | menuPage == 1 | levelSelectionPage == 1){
-            if (musicON){
-                musicON = false;
+            if (menuMusicON){
+                menuMusicON = false;
                 PlaySound(0, 0, 0);
             }
             else{
-                musicON = true;
+                menuMusicON = true;
                 PlaySound("E:\\1-1-game-project\\music\\menuMusic.wav", NULL, SND_LOOP | SND_ASYNC);
             }
         }
@@ -530,7 +542,7 @@ void drawHomepage()
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\front page.jpg");
     iSetColor (255, 255, 255);
     iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
-    iText(655, 52, "Click Right Mouse to go back", GLUT_BITMAP_TIMES_ROMAN_24);
+    iText(655, 52, "PRESS RMB or Q to go back", GLUT_BITMAP_TIMES_ROMAN_24);
 
 
 }
@@ -592,7 +604,7 @@ void drawMenuPage()
    // iSetColor(0, 0, 255); // blue color
     iShowImage(0, 0, "E:\\1-1-game-project\\images\\menupage.jpg");
     iText(92, 52, "Press F1 to stop/start Music", GLUT_BITMAP_TIMES_ROMAN_24);
-    iText(655, 52, "Click Right Mouse to go back", GLUT_BITMAP_TIMES_ROMAN_24);
+    iText(655, 52, "Press RMB or Q to go back", GLUT_BITMAP_TIMES_ROMAN_24);
 
 }
  void drawGamePage()
