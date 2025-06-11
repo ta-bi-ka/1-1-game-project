@@ -758,7 +758,7 @@ void drawLevel1()
             int y=screenHeight-(i+1)*cellHeight;
             if (maze1[i][j] == 0) {
                 iSetColor(255, 255, 255); // white color
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 3, 100); // small white dots
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 4, 100); // small white dots
             }
             
             if(maze1[i][j] == 1)
@@ -770,8 +770,8 @@ void drawLevel1()
             }
             if(maze1[i][j] == 2)
             {
-                iSetColor(255, 255, 0); // yellow color for Pacman
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+                iSetColor(255, 255, 0); // yellow color
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 3, 100); // larger yellow circles
             }
 
 
@@ -802,7 +802,7 @@ void drawLevel2()
             
             if (maze2[i][j] == 0) {
                 iSetColor(255, 255, 255); // white color
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 4, 100); // small white dots
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 3, 100); // small white dots
             }
             
             if(maze2[i][j] == 1)
@@ -813,8 +813,8 @@ void drawLevel2()
             }
             if(maze2[i][j] == 2)
             {
-                iSetColor(255, 255, 0); // yellow color for Pacman
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+                iSetColor(255, 255, 0); // yellow color
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 3, 100); // larger yellow circles
             }
         }
     }
@@ -837,7 +837,7 @@ void drawLevel3()
             int y = screenHeight - (i + 1) * cellHeight;
             if (maze3[i][j] == 0) {
                 iSetColor(255, 255, 255); // white color
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 3, 100); // small white dots
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, 2, 100); // small white dots
             }
 
             if(maze3[i][j] == 1)
@@ -847,8 +847,8 @@ void drawLevel3()
             }
             if(maze3[i][j] == 2)
             {
-                iSetColor(255, 255, 0); // yellow color for Pacman
-                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 4); // draw Pacman
+                iSetColor(255, 255, 0); // yellow color
+                iFilledCircle(x + cellWidth / 2, y + cellHeight / 2, cellWidth / 3, 100); // larger yellow circles
             }
         }
     }
